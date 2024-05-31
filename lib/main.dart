@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wedevs_task/presentation/home_page.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // await Hive.initFlutter();
-  // await Hive.openBox('repositoryBox');
   runApp(const MyApp());
 }
 
@@ -13,10 +11,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'WeDevs-Task',
-      home: HomePage(),
+    return ScreenUtilInit(
+      designSize: const Size(370, 780),
+      builder: (_, child) {
+        return const MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'WeDevs-Task',
+          home: HomePage(),
+        );
+      },
     );
   }
 }
