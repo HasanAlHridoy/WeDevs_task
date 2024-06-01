@@ -9,12 +9,14 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final String imgPath;
   Widget? suffixIcon;
+  bool? obscureText;
 
   CustomTextField({
     super.key,
     required this.hintText,
     required this.imgPath,
     this.suffixIcon,
+    this.obscureText = false,
   });
 
   @override
@@ -32,6 +34,7 @@ class CustomTextField extends StatelessWidget {
         ],
       ),
       child: TextField(
+        obscureText: obscureText!,
         decoration: InputDecoration(
           prefixIcon: Padding(
             padding: EdgeInsets.fromLTRB(16.w, 0.0.h, 12.w, 0.h),

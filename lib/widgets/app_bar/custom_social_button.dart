@@ -31,12 +31,12 @@ class CustomSocialButton extends StatelessWidget {
               color: Colors.grey.withOpacity(0.1),
               spreadRadius: 0,
               blurRadius: 2,
-              offset: Offset(0, 2), // changes position of shadow
+              offset: const Offset(0, 2), // changes position of shadow
             ),
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.all(16.r),
+          padding: EdgeInsets.all(15.r),
           child: SvgPicture.asset(
             imgPath,
             color: color,

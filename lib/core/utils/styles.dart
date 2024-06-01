@@ -74,7 +74,7 @@ class AppStyles {
 
   static get bodySmall => TextStyle(
         fontSize: 13.sp,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.w400,
         color: AppColors.hintColor,
       );
 
@@ -128,13 +128,13 @@ class AppStyles {
 
   // Button Styles
 
-  static ButtonStyle get buttonStyle => ButtonStyle(
+  static get buttonStyle => ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor),
         foregroundColor: MaterialStateProperty.all<Color>(AppColors.colorWhite),
-        minimumSize: MaterialStateProperty.all<Size>(Size(double.infinity, 61.h)),
+        minimumSize: MaterialStateProperty.all<Size>(Size(double.infinity, 60.h)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0.r), // Rounded corners
+            borderRadius: BorderRadius.circular(8.0.r), // Rounded corners
           ),
         ),
       );
