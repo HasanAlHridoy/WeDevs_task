@@ -129,12 +129,13 @@ class AppStyles {
   // Button Styles
 
   static ButtonStyle get buttonStyle => ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor),
+        foregroundColor: MaterialStateProperty.all<Color>(AppColors.colorWhite),
+        minimumSize: MaterialStateProperty.all<Size>(Size(double.infinity, 61.h)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
+            borderRadius: BorderRadius.circular(20.0.r), // Rounded corners
           ),
         ),
-        backgroundColor: MaterialStateProperty.all<Color>(AppColors.buttonColor),
-        foregroundColor: MaterialStateProperty.all<Color>(AppColors.colorWhite),
       );
 }
