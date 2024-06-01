@@ -6,121 +6,148 @@ import 'color_constant.dart';
 class AppStyles {
   // Text Styles
 
-  static get bodyLarge => TextStyle(
+  static get bodyLarge =>
+      TextStyle(
         fontSize: 25.sp,
         fontWeight: FontWeight.w700,
         color: AppColors.colorBlack,
       );
 
-  static get bodyLarge900 => TextStyle(
+  static get bodyLarge900 =>
+      TextStyle(
         fontSize: 24.sp,
         fontWeight: FontWeight.w900,
         color: AppColors.colorBlack,
       );
 
-  static get bodyMedium => TextStyle(
+  static get bodyMedium =>
+      TextStyle(
         fontSize: 17.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.hintColor,
       );
 
-  static get bodyMedium400 => TextStyle(
+  static get bodyMedium400 =>
+      TextStyle(
         fontSize: 17.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorGrey,
       );
 
-  static get bodyMediumWhite500 => TextStyle(
+  static get bodyMediumWhite500 =>
+      TextStyle(
         fontSize: 17.sp,
         fontWeight: FontWeight.w500,
         color: AppColors.colorWhite,
       );
 
-  static get bodyMediumWhite400 => TextStyle(
+  static get bodyMediumWhite400 =>
+      TextStyle(
         fontSize: 17.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorWhite,
       );
 
-  static get bodyMediumBlack400 => TextStyle(
+  static get bodyMediumBlack400 =>
+      TextStyle(
         fontSize: 17.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorBlack,
       );
 
-  static get bodyMediumBlue700 => TextStyle(
+  static get bodyMediumBlue700 =>
+      TextStyle(
         fontSize: 17.sp,
         fontWeight: FontWeight.w700,
         color: AppColors.colorWhite,
       );
 
-  static get bodyMediumButton700 => TextStyle(
+  static get bodyMediumButton700 =>
+      TextStyle(
         fontSize: 17.sp,
         fontWeight: FontWeight.w700,
         color: AppColors.buttonColor2,
       );
 
-  static get bodyMediumLightBlack300 => TextStyle(
+  static get bodyMediumTextButton700 =>
+      TextStyle(
+        fontSize: 17.sp,
+        fontWeight: FontWeight.w700,
+        color: AppColors.colorBlue,
+      );
+
+  static get bodyMediumLightBlack300 =>
+      TextStyle(
         fontSize: 17.sp,
         fontWeight: FontWeight.w300,
         color: AppColors.colorLightBlack,
       );
 
-  static get bodyMediumBlack700 => TextStyle(
+  static get bodyMediumBlack700 =>
+      TextStyle(
         fontSize: 18.sp,
         fontWeight: FontWeight.w700,
         color: AppColors.colorBlack,
       );
 
-  static get bodySmall => TextStyle(
+  static get bodySmall =>
+      TextStyle(
         fontSize: 13.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.hintColor,
       );
 
-  static get bodySmallGrey400 => TextStyle(
+  static get bodySmallGrey400 =>
+      TextStyle(
         fontSize: 15.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorGrey,
       );
 
-  static get bodySmallBlack400 => TextStyle(
+  static get bodySmallBlack400 =>
+      TextStyle(
         fontSize: 14.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorBlack,
       );
 
-  static get bodySmallBlack400S15 => TextStyle(
+  static get bodySmallBlack400S15 =>
+      TextStyle(
         fontSize: 15.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorBlack,
       );
 
-  static get bodySmallBlack400S15CGrey => TextStyle(
+  static get bodySmallBlack400S15CGrey =>
+      TextStyle(
         fontSize: 15.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.deepGreyColor,
       );
 
-  static get bodySmallTextGrey400 => TextStyle(
+  static get bodySmallTextGrey400 =>
+      TextStyle(
         fontSize: 15.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorTextGrey,
       );
 
-  static get bodySmallText2Grey400 => TextStyle(
+  static get bodySmallText2Grey400 =>
+      TextStyle(
         fontSize: 15.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorTextGrey2,
       );
 
-  static get bodySmallText2Grey400s16 => TextStyle(
+  static get bodySmallText2Grey400s16 =>
+      TextStyle(
         fontSize: 16.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorTextGrey2,
       );
 
-  static get bodyTitle700 => TextStyle(
+  static get bodyTitle700 =>
+      TextStyle(
         fontSize: 23.sp,
         fontWeight: FontWeight.w700,
         color: AppColors.colorDeepBlue,
@@ -128,7 +155,8 @@ class AppStyles {
 
   // Button Styles
 
-  static get buttonStyle => ButtonStyle(
+  static get buttonStyle =>
+      ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(AppColors.primaryColor),
         foregroundColor: MaterialStateProperty.all<Color>(AppColors.colorWhite),
         minimumSize: MaterialStateProperty.all<Size>(Size(double.infinity, 60.h)),

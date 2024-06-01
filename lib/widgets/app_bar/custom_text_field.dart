@@ -41,7 +41,7 @@ class CustomTextField extends StatelessWidget {
             child: SvgPicture.asset(
               imgPath,
               alignment: Alignment.center,
-              color: AppColors.colorFB,
+              color: AppColors.iconColor,
             ),
           ),
           suffixIcon: suffixIcon,

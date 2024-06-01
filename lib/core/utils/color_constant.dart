@@ -5,6 +5,8 @@ class AppColors {
 
   static get backgroundColor => const Color(0xffF8F8F8);
 
+  static get colorBlue => const Color(0xff2893E3);
+
   static get colorWhite => const Color(0xffFFFFFF);
 
   static get colorBlack => const Color(0xff000000);

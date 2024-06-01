@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
+import 'package:wedevs_task/presentation/sign_up_screen/sign_up_page.dart';
 import 'package:wedevs_task/widgets/app_bar/custom_social_button.dart';
 import 'package:wedevs_task/widgets/app_bar/custom_text_field.dart';
 
@@ -15,7 +16,7 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  bool showPassword = false;
+  bool showPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,9 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 SizedBox(height: 50.h),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpPage()));
+                  },
                   highlightColor: Colors.transparent,
                   splashColor: Colors.transparent,
                   child: Text(
