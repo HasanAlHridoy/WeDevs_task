@@ -68,6 +68,16 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
+                        ),
+                        builder: (context) => FilterModal(),
+                      );
+                    },
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     child: Row(
@@ -162,6 +172,128 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FilterModal extends StatefulWidget {
+  @override
+  _FilterModalState createState() => _FilterModalState();
+}
+
+class _FilterModalState extends State<FilterModal> {
+  Map<String, bool> filters = {
+    'Newest': true,
+    'Oldest': false,
+    'Price low > High': false,
+    'Price high > Low': false,
+    'Best selling': false,
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              height: 3.h,
+              width: 47.w,
+              decoration: BoxDecoration(
+                color: AppColors.bottomSheetBarColor,
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              margin: EdgeInsets.only(bottom: 20.h),
+            ),
+          ),
+          Text('Filter', style: AppStyles.bodyMediumBlack700),
+          SizedBox(height: 10.h),
+          Column(
+            children: filters.keys.map((String key) {
+              return Row(
+                children: [
+                  Checkbox(
+                    value: filters[key],
+                    activeColor: AppColors.borderCheckColor,
+                    checkColor: AppColors.colorWhite,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4),
+                      side: BorderSide(
+                        color: AppColors.borderCheckColor,
+                      ),
+                    ),
+                    onChanged: (bool? value) {
+                      setState(() {
+                        filters[key] = value!;
+                      });
+                    },
+                  ),
+                  Text(key),
+                ],
+              );
+            }).toList(),
+          ),
+          SizedBox(height: 60.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 61.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0.r), // Rounded corners
+                    ),
+                  ),
+                  child: Text(
+                    'Cancel',
+                    style: AppStyles.bodyMedium400,
+                  ),
+                ),
+              ),
+              SizedBox(width: 16.w),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.buttonColor,
+                    minimumSize: Size(double.infinity, 61.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0.r), // Rounded corners
+                    ),
+                  ),
+                  child: Text(
+                    'Apply',
+                    style: AppStyles.bodyMediumWhite400,
+                  ),
+                ),
+              ),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pop(context);
+              //   },
+              //   style: ElevatedButton.styleFrom(
+              //     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              //     // primary: Colors.green,
+              //     overlayColor: Colors.green,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(20),
+              //     ),
+              //   ),
+              //   child: Text('Apply'),
+              // ),
+            ],
+          ),
+        ],
       ),
     );
   }
