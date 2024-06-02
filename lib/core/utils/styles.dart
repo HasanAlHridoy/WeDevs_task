@@ -20,6 +20,13 @@ class AppStyles {
         color: AppColors.colorBlack,
       );
 
+  static get bodyLarge700 =>
+      TextStyle(
+        fontSize: 23.sp,
+        fontWeight: FontWeight.w700,
+        color: AppColors.colorDeepBlue,
+      );
+
   static get bodyMedium =>
       TextStyle(
         fontSize: 17.sp,
@@ -102,6 +109,7 @@ class AppStyles {
         fontSize: 15.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorGrey,
+        decoration: TextDecoration.lineThrough,
       );
 
   static get bodySmallBlack400 =>

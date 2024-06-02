@@ -88,7 +88,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(0.0.w, 0, 20.0.w, 0),
                     child: InkWell(
-                      onTap: () => _onItemTapped(3),
+                      onTap: () => _onItemTapped(2),
                       highlightColor: Colors.transparent,
                       splashColor: Colors.transparent,
                       child: SvgPicture.asset(
