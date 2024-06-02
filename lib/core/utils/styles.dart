@@ -103,10 +103,16 @@ class AppStyles {
         color: AppColors.colorBlack,
       );
 
-  static get bodySmallBlack400S15 => TextStyle(
+  static get bodySmallBlack400f15 => TextStyle(
         fontSize: 15.sp,
         fontWeight: FontWeight.w400,
         color: AppColors.colorBlack,
+      );
+
+  static get bodySmallGrey400S15 => TextStyle(
+        fontSize: 15.sp,
+        fontWeight: FontWeight.w400,
+        color: AppColors.deepGreyColor,
       );
 
   static get bodySmallBlack400S15CGrey => TextStyle(
@@ -130,7 +136,7 @@ class AppStyles {
   static get bodySmallText2Grey400s16 => TextStyle(
         fontSize: 16.sp,
         fontWeight: FontWeight.w400,
-        color: AppColors.colorTextGrey2,
+        color: AppColors.colorGrey,
       );
 
   static get bodyTitle700 => TextStyle(

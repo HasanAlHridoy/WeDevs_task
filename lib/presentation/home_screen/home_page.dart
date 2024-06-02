@@ -6,6 +6,8 @@ import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
 import 'package:wedevs_task/widgets/app_bar/bottom_nav_bar.dart';
 
+import 'home_widgets/widgets.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -26,31 +28,23 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Expanded(
-                  flex: 4,
-                  child: SizedBox.shrink(),
+                const SizedBox.shrink(),
+                Text(
+                  'Product List',
+                  style: AppStyles.bodyLarge700,
                 ),
-                Expanded(
-                    flex: 8,
-                    child: Text(
-                      'Product List',
-                      style: AppStyles.bodyLarge700,
-                    )),
-                Expanded(
-                  flex: 0,
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    child: SvgPicture.asset(
-                      ImageConstant.searchImg,
-                      color: AppColors.colorDeepBlue,
-                    ),
+                InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  child: SvgPicture.asset(
+                    ImageConstant.searchImg,
+                    color: AppColors.colorDeepBlue,
                   ),
                 ),
               ],
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 30.0.h),
+              margin: EdgeInsets.fromLTRB(0, 30.0.h, 0, 0.h),
               padding: EdgeInsets.symmetric(horizontal: 20.0.w),
               height: 60.h,
               decoration: BoxDecoration(
@@ -75,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
                         ),
-                        builder: (context) => FilterModal(),
+                        builder: (context) => const FilterModal(),
                       );
                     },
                     splashColor: Colors.transparent,
@@ -92,7 +86,16 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text('Sort by', style: AppStyles.bodySmallText2Grey400s16),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: true,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
+                            ),
+                            builder: (context) => const FilterModal(),
+                          );
+                        },
                         icon: Icon(Icons.keyboard_arrow_down_outlined, color: AppColors.colorLightGrey),
                       ),
                       SizedBox(width: 8.w),
@@ -114,15 +117,17 @@ class _HomePageState extends State<HomePage> {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 5.h,
-                    crossAxisSpacing: 10.w,
-                    mainAxisExtent: 295.h,
+                    crossAxisSpacing: 5.w,
+                    mainAxisExtent: 265.h,
                   ),
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0.r),
                       ),
-                      elevation: 5,
+                      elevation: 2,
+                      color: AppColors.colorWhite,
+                      surfaceTintColor: Colors.transparent,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -130,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                             'assets/images/test.png',
                             fit: BoxFit.contain,
                             width: double.infinity,
-                            height: 170.h,
+                            height: 150.h,
                           ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(12.w, 8.h, 0, 8.h),
@@ -141,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(12.w, 8.h, 0, 8.h),
+                            padding: EdgeInsets.fromLTRB(12.w, 8.h, 0, 4.h),
                             child: Row(
                               children: [
                                 Text(
@@ -172,128 +177,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class FilterModal extends StatefulWidget {
-  @override
-  _FilterModalState createState() => _FilterModalState();
-}
-
-class _FilterModalState extends State<FilterModal> {
-  Map<String, bool> filters = {
-    'Newest': true,
-    'Oldest': false,
-    'Price low > High': false,
-    'Price high > Low': false,
-    'Best selling': false,
-  };
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: Container(
-              height: 3.h,
-              width: 47.w,
-              decoration: BoxDecoration(
-                color: AppColors.bottomSheetBarColor,
-                borderRadius: BorderRadius.circular(10.r),
-              ),
-              margin: EdgeInsets.only(bottom: 20.h),
-            ),
-          ),
-          Text('Filter', style: AppStyles.bodyMediumBlack700),
-          SizedBox(height: 10.h),
-          Column(
-            children: filters.keys.map((String key) {
-              return Row(
-                children: [
-                  Checkbox(
-                    value: filters[key],
-                    activeColor: AppColors.borderCheckColor,
-                    checkColor: AppColors.colorWhite,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                      side: BorderSide(
-                        color: AppColors.borderCheckColor,
-                      ),
-                    ),
-                    onChanged: (bool? value) {
-                      setState(() {
-                        filters[key] = value!;
-                      });
-                    },
-                  ),
-                  Text(key),
-                ],
-              );
-            }).toList(),
-          ),
-          SizedBox(height: 60.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: Size(double.infinity, 61.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0.r), // Rounded corners
-                    ),
-                  ),
-                  child: Text(
-                    'Cancel',
-                    style: AppStyles.bodyMedium400,
-                  ),
-                ),
-              ),
-              SizedBox(width: 16.w),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.buttonColor,
-                    minimumSize: Size(double.infinity, 61.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0.r), // Rounded corners
-                    ),
-                  ),
-                  child: Text(
-                    'Apply',
-                    style: AppStyles.bodyMediumWhite400,
-                  ),
-                ),
-              ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.pop(context);
-              //   },
-              //   style: ElevatedButton.styleFrom(
-              //     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-              //     // primary: Colors.green,
-              //     overlayColor: Colors.green,
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(20),
-              //     ),
-              //   ),
-              //   child: Text('Apply'),
-              // ),
-            ],
-          ),
-        ],
       ),
     );
   }

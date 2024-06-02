@@ -25,6 +25,8 @@ class AppColors {
 
   static get colorGrey => const Color(0xff818995);
 
+  static get arrowColor => const Color(0xff899AA2);
+
   static get deepGreyColor => const Color(0xff535353);
 
   static get colorLightGrey => const Color(0xffA0A9BD);
