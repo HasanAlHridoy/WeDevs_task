@@ -4,7 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
-import 'package:wedevs_task/widgets/app_bar/bottom_nav_bar.dart';
+import 'package:wedevs_task/data/repositories/repositories/repository_details.dart';
+import 'package:wedevs_task/widgets/bottom_nav_bar.dart';
 
 import 'home_widgets/custom_modal_bottom_sheet.dart';
 
@@ -16,6 +17,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int itemCount = 0;
+
+  getData() async {
+    final list = await RepositoryData().returnData();
+
+    setState(() {
+      itemCount = list.length;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,6 +131,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: GridView.builder(
+                  itemCount: itemCount,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 5.h,

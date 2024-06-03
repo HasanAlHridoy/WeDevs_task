@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wedevs_task/presentation/home_screen/home_page.dart';
 import 'package:wedevs_task/presentation/sign_in_screen/sign_in_page.dart';
-import 'package:wedevs_task/widgets/app_bar/bottom_nav_bar.dart';
 
 void main() async {
   runApp(const MyApp());

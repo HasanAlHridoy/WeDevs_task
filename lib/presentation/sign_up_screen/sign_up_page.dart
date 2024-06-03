@@ -5,8 +5,8 @@ import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
 import 'package:wedevs_task/presentation/sign_in_screen/sign_in_page.dart';
-import 'package:wedevs_task/widgets/app_bar/custom_social_button.dart';
-import 'package:wedevs_task/widgets/app_bar/custom_text_field.dart';
+import 'package:wedevs_task/widgets/custom_social_button.dart';
+import 'package:wedevs_task/widgets/custom_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -106,9 +106,15 @@ class _SignUpPageState extends State<SignUpPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomSocialButton(imgPath: ImageConstant.facebookImg),
+                  CustomSocialButton(
+                    imgPath: ImageConstant.facebookImg,
+                    onTap: () {},
+                  ),
                   SizedBox(width: 10.h),
-                  CustomSocialButton(imgPath: ImageConstant.googleImg),
+                  CustomSocialButton(
+                    imgPath: ImageConstant.googleImg,
+                    onTap: () {},
+                  ),
                 ],
               ),
               SizedBox(height: 40.h),
@@ -123,8 +129,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () {
-                      Navigator.of(context)
-                          .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignInPage()), (Route<dynamic> route) => false);
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignInPage()), (Route<dynamic> route) => false);
                     },
                     child: Text(
                       "Login",

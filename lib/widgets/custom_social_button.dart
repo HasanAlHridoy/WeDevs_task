@@ -5,19 +5,19 @@ import 'package:flutter_svg/svg.dart';
 class CustomSocialButton extends StatelessWidget {
   final String imgPath;
   Color? color;
+  final Function() onTap;
 
   CustomSocialButton({
     super.key,
     required this.imgPath,
     this.color,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // Navigate To Facebook
-      },
+      onTap: onTap,
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: Container(

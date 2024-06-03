@@ -6,10 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 
-import '../../presentation/account_screen/account_page.dart';
-import '../../presentation/cart_screen/cart_page.dart';
-import '../../presentation/category_screen/category_page.dart';
-import '../../presentation/home_screen/home_page.dart';
+import '../presentation/account_screen/account_page.dart';
+import '../presentation/cart_screen/cart_page.dart';
+import '../presentation/category_screen/category_page.dart';
+import '../presentation/home_screen/home_page.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   const CustomBottomNavBar({super.key});

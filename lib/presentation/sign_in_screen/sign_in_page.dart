@@ -4,11 +4,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
+import 'package:wedevs_task/data/repositories/repositories/repository_details.dart';
 import 'package:wedevs_task/presentation/home_screen/home_page.dart';
 import 'package:wedevs_task/presentation/sign_up_screen/sign_up_page.dart';
-import 'package:wedevs_task/widgets/app_bar/bottom_nav_bar.dart';
-import 'package:wedevs_task/widgets/app_bar/custom_social_button.dart';
-import 'package:wedevs_task/widgets/app_bar/custom_text_field.dart';
+import 'package:wedevs_task/widgets/bottom_nav_bar.dart';
+import 'package:wedevs_task/widgets/custom_social_button.dart';
+import 'package:wedevs_task/widgets/custom_text_field.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -91,9 +92,17 @@ class _SignInPageState extends State<SignInPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CustomSocialButton(imgPath: ImageConstant.facebookImg),
+                    CustomSocialButton(
+                      imgPath: ImageConstant.facebookImg,
+                      onTap: () {
+                        RepositoryData().returnData();
+                      },
+                    ),
                     SizedBox(width: 10.h),
-                    CustomSocialButton(imgPath: ImageConstant.googleImg),
+                    CustomSocialButton(
+                      imgPath: ImageConstant.googleImg,
+                      onTap: () {},
+                    ),
                   ],
                 ),
                 SizedBox(height: 50.h),
