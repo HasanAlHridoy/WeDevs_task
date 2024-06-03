@@ -6,7 +6,7 @@ import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
 import 'package:wedevs_task/widgets/app_bar/bottom_nav_bar.dart';
 
-import 'home_widgets/widgets.dart';
+import 'home_widgets/custom_modal_bottom_sheet.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

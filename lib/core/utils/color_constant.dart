@@ -35,6 +35,10 @@ class AppColors {
 
   static get colorTextGrey2 => const Color(0xff263238);
 
+  static get gradiantColor1 => const Color(0xffF2709C);
+
+  static get gradiantColor2 => const Color(0xffFF9472);
+
   static get ratingActiveColor => const Color(0xffF5A623);
 
   static get ratingInactiveColor => const Color(0xffD3D8E5);

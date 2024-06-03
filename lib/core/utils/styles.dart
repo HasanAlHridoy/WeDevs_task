@@ -136,7 +136,7 @@ class AppStyles {
   static get bodySmallText2Grey400s16 => TextStyle(
         fontSize: 16.sp,
         fontWeight: FontWeight.w400,
-        color: AppColors.colorGrey,
+        color: AppColors.colorTextGrey2,
       );
 
   static get bodyTitle700 => TextStyle(
