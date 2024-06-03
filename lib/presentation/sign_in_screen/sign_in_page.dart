@@ -5,6 +5,7 @@ import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
 import 'package:wedevs_task/data/repositories/repositories/repository_details.dart';
+import 'package:wedevs_task/data/repositories/repositories/repository_interface.dart';
 import 'package:wedevs_task/presentation/home_screen/home_page.dart';
 import 'package:wedevs_task/presentation/sign_up_screen/sign_up_page.dart';
 import 'package:wedevs_task/widgets/bottom_nav_bar.dart';
@@ -20,6 +21,10 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   bool showPassword = true;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  final RepositoryInterface _repo = RepositoryData();
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +48,11 @@ class _SignInPageState extends State<SignInPage> {
                   style: AppStyles.bodyLarge,
                 ),
                 SizedBox(height: 35.h),
-                CustomTextField(hintText: 'Email', imgPath: ImageConstant.inboxImg),
+                CustomTextField(
+                  hintText: 'Email',
+                  imgPath: ImageConstant.inboxImg,
+                  controller: emailController,
+                ),
                 SizedBox(height: 20.h),
                 CustomTextField(
                   hintText: 'Password',
@@ -61,6 +70,7 @@ class _SignInPageState extends State<SignInPage> {
                       color: AppColors.hintColor,
                     ),
                   ),
+                  controller: passwordController,
                 ),
                 SizedBox(height: 15.h),
                 Align(
@@ -80,6 +90,7 @@ class _SignInPageState extends State<SignInPage> {
                 SizedBox(height: 50.h),
                 ElevatedButton(
                   onPressed: () {
+                    _repo.login(emailController.text, passwordController.text);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomBottomNavBar()));
                   },
                   style: AppStyles.buttonStyle,

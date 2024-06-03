@@ -16,6 +16,11 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,13 +91,29 @@ class _SignUpPageState extends State<SignUpPage> {
                 ],
               ),
               SizedBox(height: 40.h),
-              CustomTextField(hintText: 'Name', imgPath: ImageConstant.accountImg),
+              CustomTextField(
+                hintText: 'Name',
+                imgPath: ImageConstant.accountImg,
+                controller: nameController,
+              ),
               SizedBox(height: 16.h),
-              CustomTextField(hintText: 'Email', imgPath: ImageConstant.inboxImg),
+              CustomTextField(
+                hintText: 'Email',
+                imgPath: ImageConstant.inboxImg,
+                controller: emailController,
+              ),
               SizedBox(height: 16.h),
-              CustomTextField(hintText: 'Password', imgPath: ImageConstant.passwordImg),
+              CustomTextField(
+                hintText: 'Password',
+                imgPath: ImageConstant.passwordImg,
+                controller: passwordController,
+              ),
               SizedBox(height: 16.h),
-              CustomTextField(hintText: 'Confirm Password', imgPath: ImageConstant.passwordImg),
+              CustomTextField(
+                hintText: 'Confirm Password',
+                imgPath: ImageConstant.passwordImg,
+                controller: confirmPasswordController,
+              ),
               SizedBox(height: 70.h),
               ElevatedButton(
                 onPressed: () {},
@@ -129,7 +150,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () {
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignInPage()), (Route<dynamic> route) => false);
+                      Navigator.of(context)
+                          .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignInPage()), (Route<dynamic> route) => false);
                     },
                     child: Text(
                       "Login",

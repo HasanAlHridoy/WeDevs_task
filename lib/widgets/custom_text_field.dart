@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final String imgPath;
   Widget? suffixIcon;
   bool? obscureText;
+  final TextEditingController controller;
 
   CustomTextField({
     super.key,
@@ -17,6 +18,7 @@ class CustomTextField extends StatelessWidget {
     required this.imgPath,
     this.suffixIcon,
     this.obscureText = false,
+    required this.controller,
   });
 
   @override
@@ -35,6 +37,7 @@ class CustomTextField extends StatelessWidget {
       ),
       child: TextField(
         obscureText: obscureText!,
+        controller: controller,
         decoration: InputDecoration(
           prefixIcon: Padding(
             padding: EdgeInsets.fromLTRB(16.w, 0.0.h, 12.w, 0.h),

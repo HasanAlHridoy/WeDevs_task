@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:wedevs_task/core/utils/pref_utils.dart';
 import '../../core/errors/app_exceptions.dart';
 import 'package:http/http.dart' as http;
 
 class ApiClient {
-  String? get baseUrl => "https://apptest.dokandemo.com/wp-json/wp/v2/";
+  String? get baseUrl => "https://apptest.dokandemo.com/wp-json";
 
   Future<dynamic> getData(String endpoint) async {
     final response = await http.get(
@@ -23,21 +24,20 @@ class ApiClient {
     }
   }
 
-  Future<dynamic> postData(String endpoint, Map<String, dynamic> data) async {
+  Future<dynamic> postData(String endpoint,
+      // Map<String, dynamic> data,
+          {bool useBearerToken = true}) async {
     try {
-      // We can use token later
-      // final headers = useBearerToken
-      //     ? {
-      //         'Authorization': 'Bearer ''}',
-      //       }
-      //     : {};
+      final headers = useBearerToken
+          ? {
+        'Authorization': 'Bearer ${PrefUtils().getAuthToken()}',
+      }
+          : {};
 
       Response response = await http.post(
         Uri.parse('$baseUrl/$endpoint'),
-        headers: {
-          'Authorization': 'Bearer ' '}',
-        },
-        body: json.encode(data),
+        headers: headers.cast<String, String>(),
+        // body: json.encode(data),
       );
       var responseJson = _processResponse(response);
       return responseJson;
