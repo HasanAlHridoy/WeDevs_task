@@ -10,17 +10,14 @@ class ApiClient {
   Future<dynamic> getData(String endpoint) async {
     final response = await http.get(
       Uri.parse('$baseUrl$endpoint'),
-      // We can use token later
-      // headers: {
-      //   'Authorization': 'Bearer ''}',
-      // },
+      headers: {
+        'Authorization': 'Bearer ' '}',
+      },
     );
     if (response.statusCode == 200) {
-      // Extract the body of the response (which is a String)
       String responseBody = response.body;
       return responseBody;
     } else {
-      // Handle non-200 status code
       print('Error: ${response.statusCode}');
       throw Exception('Error in getData => ${response.statusCode}');
     }
@@ -37,6 +34,9 @@ class ApiClient {
 
       Response response = await http.post(
         Uri.parse('$baseUrl/$endpoint'),
+        headers: {
+          'Authorization': 'Bearer ' '}',
+        },
         body: json.encode(data),
       );
       var responseJson = _processResponse(response);

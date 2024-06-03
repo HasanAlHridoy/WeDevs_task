@@ -19,4 +19,5 @@ class ImageConstant {
   static String personImg = '$imagePath/person.svg';
   static String searchImg = '$imagePath/search.svg';
   static String facebookImg = '$imagePath/facebook.svg';
+  static String errorImage = '$imagePath/error.jpg';
 }

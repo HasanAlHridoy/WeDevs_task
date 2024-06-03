@@ -3,8 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
 
+import '../product_model/product_model.dart';
+
 class FilterModal extends StatefulWidget {
-  const FilterModal({super.key});
+  final List<ProductDetailsModel> products;
+
+  const FilterModal({super.key, required this.products});
 
   @override
   _FilterModalState createState() => _FilterModalState();
@@ -12,7 +16,7 @@ class FilterModal extends StatefulWidget {
 
 class _FilterModalState extends State<FilterModal> {
   Map<String, bool> filters = {
-    'Newest': true,
+    'Newest': false,
     'Oldest': false,
     'Price low > High': false,
     'Price high > Low': false,
@@ -101,6 +105,11 @@ class _FilterModalState extends State<FilterModal> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
+                    if (filters['Newest'] == true) {
+                      widget.products.sort((a, b) => b.dateCreated.compareTo(a.dateCreated));
+                    } else if (filters['Oldest'] == true) {
+                      widget.products.sort((a, b) => a.dateCreated.compareTo(b.dateCreated));
+                    }
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(

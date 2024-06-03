@@ -5,6 +5,7 @@ import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
 import 'package:wedevs_task/data/repositories/repositories/repository_details.dart';
+import 'package:wedevs_task/presentation/home_screen/product_model/product_model.dart';
 import 'package:wedevs_task/widgets/bottom_nav_bar.dart';
 
 import 'home_widgets/custom_modal_bottom_sheet.dart';
@@ -18,14 +19,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int itemCount = 0;
+  List<ProductDetailsModel> list = [];
 
   getData() async {
-    final list = await RepositoryData().returnData();
+    list = await RepositoryData().returnData();
 
     setState(() {
       itemCount = list.length;
     });
   }
+
+  getNewestData() {}
 
   @override
   void initState() {
@@ -81,13 +85,12 @@ class _HomePageState extends State<HomePage> {
                   InkWell(
                     onTap: () {
                       showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
-                        ),
-                        builder: (context) => const FilterModal(),
-                      );
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
+                          ),
+                          builder: (context) => FilterModal(products: list)).then((value) => setState(() {}));
                     },
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
@@ -105,13 +108,14 @@ class _HomePageState extends State<HomePage> {
                       IconButton(
                         onPressed: () {
                           showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
-                            ),
-                            builder: (context) => const FilterModal(),
-                          );
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
+                              ),
+                              builder: (context) => FilterModal(products: list)).then((value) => setState(() {}));
+
+                          // setState(() {});
                         },
                         icon: Icon(Icons.keyboard_arrow_down_outlined, color: AppColors.colorLightGrey),
                       ),
@@ -149,11 +153,31 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.asset(
-                            'assets/images/test.png',
-                            fit: BoxFit.contain,
+                          Image.network(
+                            list[index].store.avatar,
                             width: double.infinity,
                             height: 150.h,
+                            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              } else {
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes != null
+                                        ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
+                                        : null,
+                                  ),
+                                );
+                              }
+                            },
+                            errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                              return Image.asset(
+                                ImageConstant.errorImage,
+                                fit: BoxFit.contain,
+                                width: double.infinity,
+                                height: 150.h,
+                              );
+                            },
                           ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(12.w, 8.h, 0, 8.h),

@@ -4,7 +4,8 @@
 
 import 'dart:convert';
 
-List<ProductDetailsModel> productDetailsModelFromJson(String str) => List<ProductDetailsModel>.from(json.decode(str).map((x) => ProductDetailsModel.fromJson(x)));
+List<ProductDetailsModel> productDetailsModelFromJson(String str) =>
+    List<ProductDetailsModel>.from(json.decode(str).map((x) => ProductDetailsModel.fromJson(x)));
 
 String productDetailsModelToJson(List<ProductDetailsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
@@ -69,7 +70,7 @@ class ProductDetailsModel {
   String purchaseNote;
   List<Category> categories;
   List<Category> tags;
-  List<Image> images;
+  List<Images> images;
   List<Attribute> attributes;
   List<dynamic> defaultAttributes;
   List<int> variations;
@@ -212,7 +213,7 @@ class ProductDetailsModel {
         purchaseNote: json["purchase_note"],
         categories: List<Category>.from(json["categories"].map((x) => Category.fromJson(x))),
         tags: List<Category>.from(json["tags"].map((x) => Category.fromJson(x))),
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        images: List<Images>.from(json["images"].map((x) => Images.fromJson(x))),
         attributes: List<Attribute>.from(json["attributes"].map((x) => Attribute.fromJson(x))),
         defaultAttributes: List<dynamic>.from(json["default_attributes"].map((x) => x)),
         variations: List<int>.from(json["variations"].map((x) => x)),
@@ -408,7 +409,7 @@ class Download {
       };
 }
 
-class Image {
+class Images {
   int id;
   DateTime dateCreated;
   DateTime dateCreatedGmt;
@@ -419,7 +420,7 @@ class Image {
   String alt;
   int position;
 
-  Image({
+  Images({
     required this.id,
     required this.dateCreated,
     required this.dateCreatedGmt,
@@ -431,7 +432,7 @@ class Image {
     required this.position,
   });
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory Images.fromJson(Map<String, dynamic> json) => Images(
         id: json["id"],
         dateCreated: DateTime.parse(json["date_created"]),
         dateCreatedGmt: DateTime.parse(json["date_created_gmt"]),

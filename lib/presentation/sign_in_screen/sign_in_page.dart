@@ -94,9 +94,7 @@ class _SignInPageState extends State<SignInPage> {
                   children: [
                     CustomSocialButton(
                       imgPath: ImageConstant.facebookImg,
-                      onTap: () {
-                        RepositoryData().returnData();
-                      },
+                      onTap: () {},
                     ),
                     SizedBox(width: 10.h),
                     CustomSocialButton(
