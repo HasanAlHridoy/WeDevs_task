@@ -4,7 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
+import 'package:wedevs_task/data/repositories/repositories/repository_details.dart';
+import 'package:wedevs_task/data/repositories/repositories/repository_interface.dart';
 import 'package:wedevs_task/presentation/sign_in_screen/sign_in_page.dart';
+import 'package:wedevs_task/presentation/sign_up_screen/model/register_response_model.dart';
+import 'package:wedevs_task/widgets/bottom_nav_bar.dart';
 import 'package:wedevs_task/widgets/custom_social_button.dart';
 import 'package:wedevs_task/widgets/custom_text_field.dart';
 
@@ -16,6 +20,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final RepositoryInterface _repo = RepositoryData();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -116,7 +121,37 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               SizedBox(height: 70.h),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  if (nameController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Email is Empty'), backgroundColor: Colors.red),
+                    );
+                    return;
+                  }
+                  if (emailController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Name is Empty'), backgroundColor: Colors.red),
+                    );
+                    return;
+                  }
+                  if (passwordController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Password is Empty'), backgroundColor: Colors.red),
+                    );
+                    return;
+                  }
+                  if (passwordController.text != confirmPasswordController.text) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Password not matched'), backgroundColor: Colors.red),
+                    );
+                    return;
+                  }
+                  RegisterResponseModel registerInfo = await _repo.register(nameController.text, emailController.text, passwordController.text);
+
+                  if (mounted) {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomBottomNavBar()));
+                  }
+                },
                 style: AppStyles.buttonStyle,
                 child: Text(
                   'Sign Up',
@@ -150,8 +185,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () {
-                      Navigator.of(context)
-                          .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignInPage()), (Route<dynamic> route) => false);
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignInPage()), (Route<dynamic> route) => false);
                     },
                     child: Text(
                       "Login",

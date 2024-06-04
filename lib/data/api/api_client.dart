@@ -24,21 +24,21 @@ class ApiClient {
     }
   }
 
-  Future<dynamic> postData(String endpoint,
-      // Map<String, dynamic> data,
-          {bool useBearerToken = true}) async {
+  Future<dynamic> postData(String endpoint, Map<String, dynamic>? data, {bool useBearerToken = true}) async {
     try {
       final headers = useBearerToken
           ? {
-        'Authorization': 'Bearer ${PrefUtils().getAuthToken()}',
-      }
+              'Authorization': 'Bearer ${PrefUtils().getAuthToken()}',
+            }
           : {};
-
+      print('tttttttttttttttt');
+      print(data);
       Response response = await http.post(
         Uri.parse('$baseUrl/$endpoint'),
         headers: headers.cast<String, String>(),
-        // body: json.encode(data),
+        body: json.encode(data),
       );
+      print(response.body);
       var responseJson = _processResponse(response);
       return responseJson;
     } catch (e) {
@@ -60,12 +60,17 @@ _processResponse(Response response) async {
     case 401:
       SnackBar(content: const Text('Error'), backgroundColor: Colors.red);
       final Map<String, dynamic> errorData = json.decode(response.body);
-      final String errorMessage = errorData['errors']['message'];
+      final String errorMessage = errorData['code'];
+      throw UnauthorizedException(errorMessage, response.request?.url.toString());
+    case 403:
+      SnackBar(content: Text('User/Password is not matched'), backgroundColor: Colors.red);
+      final Map<String, dynamic> errorData = json.decode(response.body);
+      final String errorMessage = errorData['code'];
       throw UnauthorizedException(errorMessage, response.request?.url.toString());
     case 404:
       SnackBar(content: const Text('Error'), backgroundColor: Colors.red);
       final Map<String, dynamic> errorData = json.decode(response.body);
-      final String errorMessage = errorData['errors']['message'];
+      final String errorMessage = errorData['code'];
       throw DataNotFoundException(errorMessage, response.request?.url.toString());
     case 500:
     default:

@@ -12,6 +12,8 @@ import 'package:wedevs_task/widgets/bottom_nav_bar.dart';
 import 'package:wedevs_task/widgets/custom_social_button.dart';
 import 'package:wedevs_task/widgets/custom_text_field.dart';
 
+import 'model/login_response_model.dart';
+
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
@@ -24,7 +26,6 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final RepositoryInterface _repo = RepositoryData();
-
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +90,24 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 SizedBox(height: 50.h),
                 ElevatedButton(
-                  onPressed: () {
-                    _repo.login(emailController.text, passwordController.text);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomBottomNavBar()));
+                  onPressed: () async {
+                    if (emailController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Email/ UserName is Empty'), backgroundColor: Colors.red),
+                      );
+                      return;
+                    }
+                    if (passwordController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Password is Empty'), backgroundColor: Colors.red),
+                      );
+                      return;
+                    }
+                    LoginResponseModel loginInfo = await _repo.login(emailController.text, passwordController.text);
+                    
+                    if (mounted) {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomBottomNavBar()));
+                    }
                   },
                   style: AppStyles.buttonStyle,
                   child: Text(
