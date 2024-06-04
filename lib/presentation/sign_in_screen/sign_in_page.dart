@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
+import 'package:wedevs_task/core/utils/pref_utils.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
 import 'package:wedevs_task/data/repositories/repositories/repository_details.dart';
 import 'package:wedevs_task/data/repositories/repositories/repository_interface.dart';
@@ -104,7 +105,7 @@ class _SignInPageState extends State<SignInPage> {
                       return;
                     }
                     LoginResponseModel loginInfo = await _repo.login(emailController.text, passwordController.text);
-                    
+                    PrefUtils().setAuthToken(loginInfo.token);
                     if (mounted) {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomBottomNavBar()));
                     }

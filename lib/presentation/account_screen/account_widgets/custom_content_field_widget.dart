@@ -6,11 +6,13 @@ import 'package:wedevs_task/core/utils/styles.dart';
 class CustomContentWithField extends StatelessWidget {
   final String title;
   final String hintText;
+  final TextEditingController controller;
 
   const CustomContentWithField({
     super.key,
     required this.hintText,
     required this.title,
+    required this.controller,
   });
 
   @override
@@ -27,6 +29,7 @@ class CustomContentWithField extends StatelessWidget {
             border: Border.all(width: 0.5, color: AppColors.colorLightGrey),
           ),
           child: TextField(
+            controller: controller,
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: AppStyles.bodySmallText2Grey400,

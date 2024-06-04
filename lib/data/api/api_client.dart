@@ -24,21 +24,19 @@ class ApiClient {
     }
   }
 
-  Future<dynamic> postData(String endpoint, Map<String, dynamic>? data, {bool useBearerToken = true}) async {
+  Future<dynamic> postData(String endpoint, Map<String, dynamic> data, {bool useBearerToken = true}) async {
     try {
-      final headers = useBearerToken
-          ? {
-              'Authorization': 'Bearer ${PrefUtils().getAuthToken()}',
-            }
-          : {};
-      print('tttttttttttttttt');
-      print(data);
+      final headers = <String, String>{
+        'Content-Type': 'application/json', // Add Content-Type header
+      };
+      if (useBearerToken) {
+        headers['Authorization'] = 'Bearer ${PrefUtils().getAuthToken()}';
+      }
       Response response = await http.post(
         Uri.parse('$baseUrl/$endpoint'),
         headers: headers.cast<String, String>(),
         body: json.encode(data),
       );
-      print(response.body);
       var responseJson = _processResponse(response);
       return responseJson;
     } catch (e) {

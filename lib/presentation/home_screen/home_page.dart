@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
+import 'package:wedevs_task/core/utils/pref_utils.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
 import 'package:wedevs_task/data/repositories/repositories/repository_details.dart';
+import 'package:wedevs_task/domain/jwt_decoder.dart';
 import 'package:wedevs_task/presentation/home_screen/product_model/product_model.dart';
 import 'package:wedevs_task/widgets/bottom_nav_bar.dart';
 
@@ -121,6 +125,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       SizedBox(width: 8.w),
                       InkWell(
+                        onTap: () {},
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         child: SvgPicture.asset(
@@ -163,9 +168,7 @@ class _HomePageState extends State<HomePage> {
                               } else {
                                 return Center(
                                   child: CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes != null
-                                        ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
-                                        : null,
+                                    value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1) : null,
                                   ),
                                 );
                               }

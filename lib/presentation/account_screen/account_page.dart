@@ -6,12 +6,27 @@ import 'package:flutter_svg/svg.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
+import 'package:wedevs_task/data/repositories/repositories/repository_details.dart';
+import 'package:wedevs_task/data/repositories/repositories/repository_interface.dart';
 
 import 'account_widgets/custom_content_field_widget.dart';
 import 'account_widgets/custom_expansion_tile.dart';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
+
+  @override
+  State<AccountPage> createState() => _AccountPageState();
+}
+
+class _AccountPageState extends State<AccountPage> {
+  final RepositoryInterface _repo = RepositoryData();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController unitController = TextEditingController();
+  TextEditingController zipController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -80,31 +95,41 @@ class AccountPage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const CustomContentWithField(
+                              CustomContentWithField(
                                 hintText: 'youremail@xmail.com',
                                 title: 'Email',
+                                controller: emailController,
                               ),
                               const SizedBox(height: 16),
-                              const CustomContentWithField(
-                                hintText: 'William Bennett',
-                                title: 'Full Name',
+                              CustomContentWithField(
+                                hintText: 'William',
+                                title: 'First Name',
+                                controller: firstNameController,
+                              ),
+                              CustomContentWithField(
+                                hintText: 'Bennett',
+                                title: 'Last Name',
+                                controller: lastNameController,
                               ),
                               const SizedBox(height: 16),
-                              const CustomContentWithField(
+                              CustomContentWithField(
                                 hintText: '465 Nolan Causeway Suite 079',
                                 title: 'Street Address',
+                                controller: addressController,
                               ),
                               const SizedBox(height: 16),
-                              const CustomContentWithField(
+                              CustomContentWithField(
                                 hintText: 'Apt, Suite, Bldg (optional)',
                                 title: 'Unit 512',
+                                controller: unitController,
                               ),
                               const SizedBox(height: 16),
                               SizedBox(
                                 width: (370 / 5).w,
-                                child: const CustomContentWithField(
+                                child: CustomContentWithField(
                                   hintText: '77017',
                                   title: 'Zip Code',
+                                  controller: zipController,
                                 ),
                               ),
                               const SizedBox(height: 24),
@@ -132,8 +157,11 @@ class AccountPage extends StatelessWidget {
                                   SizedBox(width: 16.w),
                                   Expanded(
                                     child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
+                                      onPressed: () async {
+                                        await _repo.updateProfile(firstNameController.text, lastNameController.text);
+                                        if (mounted) {
+                                          Navigator.pop(context);
+                                        }
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColors.buttonColor,

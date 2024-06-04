@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
@@ -146,7 +150,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     );
                     return;
                   }
-                  RegisterResponseModel registerInfo = await _repo.register(nameController.text, emailController.text, passwordController.text);
+                  await _repo.register(nameController.text, emailController.text, passwordController.text);
 
                   if (mounted) {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomBottomNavBar()));
