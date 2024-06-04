@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wedevs_task/core/utils/pref_utils.dart';
 import 'package:wedevs_task/domain/jwt_decoder.dart';
@@ -60,8 +61,6 @@ class RepositoryData with ErrorController implements RepositoryInterface {
     try {
       var response = await apiClient.postData("wp/v2/users/$userId", body, useBearerToken: true);
       var updatedProfileResponse = profileUpdateResponseModelFromJson(response);
-      print(updatedProfileResponse.firstName);
-      print(updatedProfileResponse.lastName);
       return updatedProfileResponse;
     } catch (e) {
       handleError(e);

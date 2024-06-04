@@ -11,6 +11,7 @@ import 'package:wedevs_task/data/repositories/repositories/repository_interface.
 
 import 'account_widgets/custom_content_field_widget.dart';
 import 'account_widgets/custom_expansion_tile.dart';
+import 'model/profile_update_response_model.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -106,6 +107,7 @@ class _AccountPageState extends State<AccountPage> {
                                 title: 'First Name',
                                 controller: firstNameController,
                               ),
+                              const SizedBox(height: 16),
                               CustomContentWithField(
                                 hintText: 'Bennett',
                                 title: 'Last Name',
@@ -159,9 +161,11 @@ class _AccountPageState extends State<AccountPage> {
                                     child: ElevatedButton(
                                       onPressed: () async {
                                         await _repo.updateProfile(firstNameController.text, lastNameController.text);
-                                        if (mounted) {
-                                          Navigator.pop(context);
-                                        }
+                                        firstNameController.clear();
+                                        lastNameController.clear();
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(content: Text('Successfully Updated'), backgroundColor: Colors.green),
+                                        );
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColors.buttonColor,

@@ -106,6 +106,7 @@ class _SignInPageState extends State<SignInPage> {
                     }
                     LoginResponseModel loginInfo = await _repo.login(emailController.text, passwordController.text);
                     PrefUtils().setAuthToken(loginInfo.token);
+                    print(loginInfo.token);
                     if (mounted) {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomBottomNavBar()));
                     }
