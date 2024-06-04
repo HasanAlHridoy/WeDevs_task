@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
-        padding: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 0),
+        padding: EdgeInsets.fromLTRB(20.w, 35.h, 20.w, 0),
         child: Column(
           children: [
             SizedBox(height: 10.h),
@@ -168,7 +168,9 @@ class _HomePageState extends State<HomePage> {
                               } else {
                                 return Center(
                                   child: CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1) : null,
+                                    value: loadingProgress.expectedTotalBytes != null
+                                        ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
+                                        : null,
                                   ),
                                 );
                               }
@@ -185,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(12.w, 8.h, 0, 8.h),
                             child: Text(
-                              'Girls Stylish Dresses',
+                              list[index].name,
                               style: AppStyles.bodySmallBlack400,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -195,11 +197,11 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               children: [
                                 Text(
-                                  '\$150',
+                                  '\$${list[index].regularPrice}',
                                   style: AppStyles.bodySmallGrey400,
                                 ),
                                 SizedBox(width: 8.w),
-                                Text('\$79.00', style: AppStyles.bodyMediumBlack700),
+                                Text('\$${list[index].price}', style: AppStyles.bodyMediumBlack700),
                               ],
                             ),
                           ),

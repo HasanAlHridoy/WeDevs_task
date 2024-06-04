@@ -35,7 +35,7 @@ class _AccountPageState extends State<AccountPage> {
       backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 0),
+          padding: EdgeInsets.fromLTRB(20.w, 35.h, 20.w, 0),
           child: Column(
             children: [
               SizedBox(height: 10.h),
