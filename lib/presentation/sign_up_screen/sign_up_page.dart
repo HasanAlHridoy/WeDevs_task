@@ -153,7 +153,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   await _repo.register(nameController.text, emailController.text, passwordController.text);
 
                   if (mounted) {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const CustomBottomNavBar()));
+                    Navigator.of(context)
+                        .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const CustomBottomNavBar()), (Route<dynamic> route) => false);
                   }
                 },
                 style: AppStyles.buttonStyle,
@@ -189,7 +190,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () {
-                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignInPage()), (Route<dynamic> route) => false);
+                      Navigator.of(context)
+                          .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignInPage()), (Route<dynamic> route) => false);
                     },
                     child: Text(
                       "Login",
