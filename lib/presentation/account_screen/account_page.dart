@@ -3,34 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
 import 'package:wedevs_task/data/repositories/repositories/repository_details.dart';
 import 'package:wedevs_task/data/repositories/repositories/repository_interface.dart';
+import 'package:wedevs_task/presentation/account_screen/controller/account_controller.dart';
 
 import 'account_widgets/custom_content_field_widget.dart';
 import 'account_widgets/custom_expansion_tile.dart';
 import 'model/profile_update_response_model.dart';
 
-class AccountPage extends StatefulWidget {
+class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
-
-  @override
-  State<AccountPage> createState() => _AccountPageState();
-}
-
-class _AccountPageState extends State<AccountPage> {
-  final RepositoryInterface _repo = RepositoryData();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-  TextEditingController unitController = TextEditingController();
-  TextEditingController zipController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
+    final AccountController accountController = Get.put(AccountController());
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
@@ -99,31 +90,31 @@ class _AccountPageState extends State<AccountPage> {
                               CustomContentWithField(
                                 hintText: 'youremail@xmail.com',
                                 title: 'Email',
-                                controller: emailController,
+                                controller: accountController.emailController,
                               ),
                               const SizedBox(height: 16),
                               CustomContentWithField(
                                 hintText: 'William',
                                 title: 'First Name',
-                                controller: firstNameController,
+                                controller: accountController.firstNameController,
                               ),
                               const SizedBox(height: 16),
                               CustomContentWithField(
                                 hintText: 'Bennett',
                                 title: 'Last Name',
-                                controller: lastNameController,
+                                controller: accountController.lastNameController,
                               ),
                               const SizedBox(height: 16),
                               CustomContentWithField(
                                 hintText: '465 Nolan Causeway Suite 079',
                                 title: 'Street Address',
-                                controller: addressController,
+                                controller: accountController.addressController,
                               ),
                               const SizedBox(height: 16),
                               CustomContentWithField(
                                 hintText: 'Apt, Suite, Bldg (optional)',
                                 title: 'Unit 512',
-                                controller: unitController,
+                                controller: accountController.unitController,
                               ),
                               const SizedBox(height: 16),
                               SizedBox(
@@ -131,7 +122,7 @@ class _AccountPageState extends State<AccountPage> {
                                 child: CustomContentWithField(
                                   hintText: '77017',
                                   title: 'Zip Code',
-                                  controller: zipController,
+                                  controller: accountController.zipController,
                                 ),
                               ),
                               const SizedBox(height: 24),
@@ -158,26 +149,32 @@ class _AccountPageState extends State<AccountPage> {
                                   ),
                                   SizedBox(width: 16.w),
                                   Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () async {
-                                        await _repo.updateProfile(firstNameController.text, lastNameController.text);
-                                        firstNameController.clear();
-                                        lastNameController.clear();
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(content: Text('Successfully Updated'), backgroundColor: Colors.green),
-                                        );
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: AppColors.buttonColor,
-                                        minimumSize: Size(double.infinity, 50.h),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(8.0.r), // Rounded corners
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Apply',
-                                        style: AppStyles.bodyMediumWhite400,
-                                      ),
+                                    child: Obx(
+                                      () => !accountController.isLoading.value
+                                          ? ElevatedButton(
+                                              onPressed: () async {
+                                                await accountController.updateProfile();
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  const SnackBar(content: Text('Successfully Updated'), backgroundColor: Colors.green),
+                                                );
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: AppColors.buttonColor,
+                                                minimumSize: Size(double.infinity, 50.h),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(8.0.r), // Rounded corners
+                                                ),
+                                              ),
+                                              child: Text(
+                                                'Apply',
+                                                style: AppStyles.bodyMediumWhite400,
+                                              ),
+                                            )
+                                          : Center(
+                                              child: CircularProgressIndicator(
+                                                color: AppColors.primaryColor,
+                                              ),
+                                            ),
                                     ),
                                   ),
                                 ],

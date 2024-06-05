@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/image_constant.dart';
@@ -29,8 +28,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 4), () {
-      print(PrefUtils().getAuthToken().isEmpty);
-      print(PrefUtils().getAuthToken());
       if (PrefUtils().getAuthToken().isEmpty) {
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignInPage()), (Route<dynamic> route) => false);
       } else {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../utils/color_constant.dart';
 import 'app_exceptions.dart';
