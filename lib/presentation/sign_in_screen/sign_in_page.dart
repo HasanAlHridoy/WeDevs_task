@@ -93,11 +93,11 @@ class _SignInPageState extends State<SignInPage> {
                 SizedBox(height: 50.h),
                 Obx(() => !signInController.isLoading.value
                     ? ElevatedButton(
-                        onPressed: () async{
-                          await signInController.signIn();
-                          if (mounted) {
-                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const CustomBottomNavBar()), (Route<dynamic> route) => false);
-                          }
+                        onPressed: () {
+                          signInController.signIn();
+                          // if (mounted) {
+                          //   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const CustomBottomNavBar()), (Route<dynamic> route) => false);
+                          // }
                         },
                         style: AppStyles.buttonStyle,
                         child: Text(

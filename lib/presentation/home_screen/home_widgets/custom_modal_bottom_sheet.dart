@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
+import 'package:wedevs_task/presentation/home_screen/controller/home_controller.dart';
 
 import '../product_model/product_model.dart';
 
 class FilterModal extends StatefulWidget {
-  final List<ProductDetailsModel> products;
+  final HomeController homeController;
 
-  const FilterModal({super.key, required this.products});
+  const FilterModal({super.key, required this.homeController});
 
   @override
   _FilterModalState createState() => _FilterModalState();
@@ -106,9 +107,9 @@ class _FilterModalState extends State<FilterModal> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (filters['Newest'] == true) {
-                      widget.products.sort((a, b) => b.dateCreated.compareTo(a.dateCreated));
+                      widget.homeController.productData.sort((a, b) => b.dateCreated.compareTo(a.dateCreated));
                     } else if (filters['Oldest'] == true) {
-                      widget.products.sort((a, b) => a.dateCreated.compareTo(b.dateCreated));
+                      widget.homeController.productData.sort((a, b) => a.dateCreated.compareTo(b.dateCreated));
                     }
                     Navigator.pop(context);
                   },

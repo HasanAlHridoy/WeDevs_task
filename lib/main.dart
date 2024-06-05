@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:wedevs_task/core/utils/pref_utils.dart';
 import 'package:wedevs_task/presentation/home_screen/home_page.dart';
 import 'package:wedevs_task/presentation/sign_in_screen/sign_in_page.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(370, 780),
       builder: (_, child) {
-        return const MaterialApp(
+        return const GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'WeDevs-Task',
           home: SplashScreen(),
