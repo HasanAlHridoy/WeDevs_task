@@ -30,11 +30,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     super.initState();
     Future.delayed(const Duration(seconds: 4), () {
       if (PrefUtils().getAuthToken().isEmpty) {
-        Get.offAll(() => SignInPage());
-        // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const SignInPage()), (Route<dynamic> route) => false);
+        Get.offAll(() => const SignInPage());
       } else {
-        Get.offAll(() => CustomBottomNavBar());
-        // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const CustomBottomNavBar()), (Route<dynamic> route) => false);
+        Get.offAll(() => const CustomBottomNavBar());
       }
     });
   }

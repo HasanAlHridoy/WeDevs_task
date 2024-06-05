@@ -64,9 +64,7 @@ class _SignInPageState extends State<SignInPage> {
                       padding: EdgeInsets.fromLTRB(0.w, 0.0.h, 8.w, 0.h),
                       child: IconButton(
                         onPressed: () {
-                          setState(() {
-                            signInController.showPassword.value = !signInController.showPassword.value;
-                          });
+                          signInController.showPassword.value = !signInController.showPassword.value;
                         },
                         icon: signInController.showPassword.value ? const Icon(Icons.visibility_off) : const Icon(Icons.visibility),
                         color: AppColors.hintColor,
@@ -95,9 +93,6 @@ class _SignInPageState extends State<SignInPage> {
                     ? ElevatedButton(
                         onPressed: () {
                           signInController.signIn();
-                          // if (mounted) {
-                          //   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const CustomBottomNavBar()), (Route<dynamic> route) => false);
-                          // }
                         },
                         style: AppStyles.buttonStyle,
                         child: Text(
@@ -128,7 +123,8 @@ class _SignInPageState extends State<SignInPage> {
                 SizedBox(height: 50.h),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpPage()));
+                    Get.to(() => const SignUpPage());
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpPage()));
                   },
                   highlightColor: Colors.transparent,
                   splashColor: Colors.transparent,

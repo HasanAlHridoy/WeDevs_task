@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
@@ -11,27 +12,18 @@ import 'package:wedevs_task/core/utils/styles.dart';
 import 'package:wedevs_task/data/repositories/repositories/repository_details.dart';
 import 'package:wedevs_task/data/repositories/repositories/repository_interface.dart';
 import 'package:wedevs_task/presentation/sign_in_screen/sign_in_page.dart';
+import 'package:wedevs_task/presentation/sign_up_screen/controller/signup_controller.dart';
 import 'package:wedevs_task/presentation/sign_up_screen/model/register_response_model.dart';
 import 'package:wedevs_task/widgets/bottom_nav_bar.dart';
 import 'package:wedevs_task/widgets/custom_social_button.dart';
 import 'package:wedevs_task/widgets/custom_text_field.dart';
 
-class SignUpPage extends StatefulWidget {
+class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
-  final RepositoryInterface _repo = RepositoryData();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
+    SignUpController signUpController = Get.put(SignUpController());
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
@@ -84,7 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             color: Colors.pink.withOpacity(0.4),
                             spreadRadius: 2,
                             blurRadius: 8,
-                            offset: const Offset(0, 4), // changes position of shadow
+                            offset: const Offset(0, 4),
                           ),
                         ],
                       ),
@@ -103,65 +95,44 @@ class _SignUpPageState extends State<SignUpPage> {
               CustomTextField(
                 hintText: 'Name',
                 imgPath: ImageConstant.accountImg,
-                controller: nameController,
+                controller: signUpController.nameController,
               ),
               SizedBox(height: 16.h),
               CustomTextField(
                 hintText: 'Email',
                 imgPath: ImageConstant.inboxImg,
-                controller: emailController,
+                controller: signUpController.emailController,
               ),
               SizedBox(height: 16.h),
               CustomTextField(
                 hintText: 'Password',
                 imgPath: ImageConstant.passwordImg,
-                controller: passwordController,
+                controller: signUpController.passwordController,
               ),
               SizedBox(height: 16.h),
               CustomTextField(
                 hintText: 'Confirm Password',
                 imgPath: ImageConstant.passwordImg,
-                controller: confirmPasswordController,
+                controller: signUpController.confirmPasswordController,
               ),
               SizedBox(height: 70.h),
-              ElevatedButton(
-                onPressed: () async {
-                  if (nameController.text.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Email is Empty'), backgroundColor: Colors.red),
-                    );
-                    return;
-                  }
-                  if (emailController.text.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Name is Empty'), backgroundColor: Colors.red),
-                    );
-                    return;
-                  }
-                  if (passwordController.text.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Password is Empty'), backgroundColor: Colors.red),
-                    );
-                    return;
-                  }
-                  if (passwordController.text != confirmPasswordController.text) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Password not matched'), backgroundColor: Colors.red),
-                    );
-                    return;
-                  }
-                  await _repo.register(nameController.text, emailController.text, passwordController.text);
-
-                  if (mounted) {
-                    Navigator.of(context)
-                        .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const CustomBottomNavBar()), (Route<dynamic> route) => false);
-                  }
-                },
-                style: AppStyles.buttonStyle,
-                child: Text(
-                  'Sign Up',
-                  style: AppStyles.bodyMediumWhite500,
-                ),
+              Obx(
+                () => !signUpController.isLoading.value
+                    ? ElevatedButton(
+                        onPressed: () {
+                          signUpController.signUp();
+                        },
+                        style: AppStyles.buttonStyle,
+                        child: Text(
+                          'Sign Up',
+                          style: AppStyles.bodyMediumWhite500,
+                        ),
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
               ),
               SizedBox(height: 35.h),
               Row(

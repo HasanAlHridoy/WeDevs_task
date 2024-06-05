@@ -1,28 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:wedevs_task/core/utils/color_constant.dart';
 import 'package:wedevs_task/core/utils/styles.dart';
 import 'package:wedevs_task/presentation/home_screen/controller/home_controller.dart';
 
 import '../product_model/product_model.dart';
 
-class FilterModal extends StatefulWidget {
+class FilterModal extends StatelessWidget {
   final HomeController homeController;
 
   const FilterModal({super.key, required this.homeController});
-
-  @override
-  _FilterModalState createState() => _FilterModalState();
-}
-
-class _FilterModalState extends State<FilterModal> {
-  Map<String, bool> filters = {
-    'Newest': false,
-    'Oldest': false,
-    'Price low > High': false,
-    'Price high > Low': false,
-    'Best selling': false,
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -48,37 +36,39 @@ class _FilterModalState extends State<FilterModal> {
             child: Text('Filter', style: AppStyles.bodyMediumBlack700),
           ),
           SizedBox(height: 8.h),
-          Column(
-            children: filters.keys.map((String key) {
-              return Row(
-                children: [
-                  Transform.scale(
-                    scale: 1.1.r,
-                    child: Checkbox(
-                      value: filters[key],
-                      activeColor: AppColors.borderCheckColor,
-                      checkColor: AppColors.colorWhite,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      side: BorderSide(
-                        color: AppColors.borderCheckColor,
+          Obx(
+            () => Column(
+              children: homeController.filters.keys.map((String key) {
+                return Row(
+                  children: [
+                    Transform.scale(
+                      scale: 1.1.r,
+                      child: Checkbox(
+                        value: homeController.filters[key],
+                        activeColor: AppColors.borderCheckColor,
+                        checkColor: AppColors.colorWhite,
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        side: BorderSide(
+                          color: AppColors.borderCheckColor,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        onChanged: (bool? value) {
+                          // setState(() {
+                          homeController.filters[key] = value!;
+                          // });
+                        },
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      onChanged: (bool? value) {
-                        setState(() {
-                          filters[key] = value!;
-                        });
-                      },
                     ),
-                  ),
-                  Text(
-                    key,
-                    style: AppStyles.bodySmallBlack400f15,
-                  ),
-                ],
-              );
-            }).toList(),
+                    Text(
+                      key,
+                      style: AppStyles.bodySmallBlack400f15,
+                    ),
+                  ],
+                );
+              }).toList(),
+            ),
           ),
           SizedBox(height: 50.h),
           Row(
@@ -106,11 +96,12 @@ class _FilterModalState extends State<FilterModal> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    if (filters['Newest'] == true) {
-                      widget.homeController.productData.sort((a, b) => b.dateCreated.compareTo(a.dateCreated));
-                    } else if (filters['Oldest'] == true) {
-                      widget.homeController.productData.sort((a, b) => a.dateCreated.compareTo(b.dateCreated));
-                    }
+                    homeController.filter();
+                    // if (filters['Newest'] == true) {
+                    //   widget.homeController.productData.sort((a, b) => b.dateCreated.compareTo(a.dateCreated));
+                    // } else if (filters['Oldest'] == true) {
+                    //   widget.homeController.productData.sort((a, b) => a.dateCreated.compareTo(b.dateCreated));
+                    // }
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(

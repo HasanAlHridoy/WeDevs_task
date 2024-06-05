@@ -16,34 +16,12 @@ import 'package:wedevs_task/widgets/bottom_nav_bar.dart';
 
 import 'home_widgets/custom_modal_bottom_sheet.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  HomeController homeController = Get.put(HomeController());
-  // int itemCount = 0;
-  // List<ProductDetailsModel> list = [];
-
-  // getData() async {
-  //   list = await RepositoryData().returnData();
-
-  //   setState(() {
-  //     itemCount = list.length;
-  //   });
-  // }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getData();
-  // }
-
-  @override
   Widget build(BuildContext context) {
+    HomeController homeController = Get.put(HomeController());
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
@@ -95,7 +73,9 @@ class _HomePageState extends State<HomePage> {
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
                           ),
-                          builder: (context) => FilterModal(homeController: homeController,));
+                          builder: (context) => FilterModal(
+                                homeController: homeController,
+                              ));
                     },
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
@@ -118,8 +98,9 @@ class _HomePageState extends State<HomePage> {
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.vertical(top: Radius.circular(0)),
                               ),
-                              builder: (context) => FilterModal(homeController: homeController,));
-
+                              builder: (context) => FilterModal(
+                                    homeController: homeController,
+                                  ));
                         },
                         icon: Icon(Icons.keyboard_arrow_down_outlined, color: AppColors.colorLightGrey),
                       ),
@@ -169,7 +150,9 @@ class _HomePageState extends State<HomePage> {
                                 } else {
                                   return Center(
                                     child: CircularProgressIndicator(
-                                      value: loadingProgress.expectedTotalBytes != null ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1) : null,
+                                      value: loadingProgress.expectedTotalBytes != null
+                                          ? loadingProgress.cumulativeBytesLoaded / (loadingProgress.expectedTotalBytes ?? 1)
+                                          : null,
                                     ),
                                   );
                                 }
