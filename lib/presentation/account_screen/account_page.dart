@@ -19,6 +19,7 @@ import 'model/profile_update_response_model.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final AccountController accountController = Get.put(AccountController());
@@ -152,11 +153,8 @@ class AccountPage extends StatelessWidget {
                                     child: Obx(
                                       () => !accountController.isLoading.value
                                           ? ElevatedButton(
-                                              onPressed: () async {
-                                                await accountController.updateProfile();
-                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                  const SnackBar(content: Text('Successfully Updated'), backgroundColor: Colors.green),
-                                                );
+                                              onPressed: () {
+                                                accountController.updateProfile();
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 backgroundColor: AppColors.buttonColor,
